@@ -14,17 +14,24 @@ public class Main {
         }
 
         String url = "http://ohtustats2017.herokuapp.com/students/"+studentNr+"/submissions";
-
+        String maxUrl = "https://ohtustats2017.herokuapp.com/courses/1.json";
+        
         String bodyText = Request.Get(url).execute().returnContent().asString();
+        String maxBodyText = Request.Get(maxUrl).execute().returnContent().asString();
 
         System.out.println("json-muotoinen data:");
-        System.out.println( bodyText );
+        System.out.println( maxBodyText );
 
         Gson mapper = new Gson();
-        Submission[] subs = mapper.fromJson(bodyText, Submission[].class);
         
-        System.out.println("Oliot:");
+        Submission[] subs = mapper.fromJson(bodyText, Submission[].class);
+        Course ohtu = mapper.fromJson(maxBodyText, Course.class);
+        
+        System.out.println("Kurssi: " + ohtu.getName() + ", " + ohtu.getTerm());
+        System.out.println("opiskelijanumero: " + studentNr);
         for (Submission submission : subs) {
+            submission.setCouse(ohtu);
+            submission.initTasks();
             System.out.println(submission);
         }
 
