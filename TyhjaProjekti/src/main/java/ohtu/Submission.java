@@ -28,10 +28,7 @@ public class Submission {
         }
       
     }
-
-   
     
-
     public String getStudent_number() {
         return student_number;
     }
