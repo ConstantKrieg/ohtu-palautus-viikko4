@@ -1,0 +1,5 @@
+pekka;akkep
+jukka;akkuj
+testi;sana
+testimies;sala
+rapuihminen;salasana
